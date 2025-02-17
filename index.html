@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prototype</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Assure que la page prend toute la hauteur */
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            color: white;
+            background: url('senin.jpg') no-repeat center center fixed; 
+            background-size: cover;
+        }
+
+        /* Style de la barre de navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 10px 0;
+            text-align: center;
+            z-index: 1000;
+        }
+
+        .navbar ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        .navbar li {
+            margin: 0 15px;
+        }
+
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+            padding: 10px 15px;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+
+        .navbar a:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        /* Style du chat */
+        #chat {
+            position: fixed;
+            top: 60px;
+            right: 20px;
+            width: 300px;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Style du lecteur YouTube */
+        #youtube {
+            position: fixed;
+            top: 60px;
+            left: 20px;
+            width: 300px;
+            height: 500px;
+            background: rgba(0, 0, 0, 0.8);
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+
+        h3 {
+            text-align: center;
+            margin: 0 0 10px 0;
+        }
+
+        #messages {
+            height: 250px;
+            overflow-y: auto;
+            border: 1px solid #444;
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border-radius: 5px;
+        }
+
+        input, button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            border: none;
+            border-radius: 5px;
+        }
+
+        input {
+            background: #333;
+            color: white;
+        }
+
+        button {
+            background: #0d6efd;
+            color: white;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        button:hover {
+            background: #0948b3;
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <ul>
+            <li><a href="index.html">Accueil</a></li>
+            <li><a href="build.html">Build</a></li>
+            <li><a href="#">Armes</a></li>
+            <li><a href="#">Armure</a></li>
+            <li><a href="#">Divers</a></li>
+        </ul>
+    </nav>
+
+    <!-- Chat Communautaire -->
+    <div id="chat">
+        <h3>Chat Communautaire</h3>
+        <div id="messages"></div>
+        <input id="messageInput" placeholder="Écris un message..." autocomplete="off">
+        <button onclick="sendMessage()">Envoyer</button>
+    </div>
+
+    <!-- Lecteur YouTube -->
+    <div id="youtube">
+        <iframe id="youtubePlayer" width="100%" height="100%" src="https://www.youtube.com/embed/videoseries?list=PLCQUPkvDG0C9DD_qNDuW_0wx-uJY-yWw3" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    </div>
+<!-- Lien vers le serveur Discord -->
+<div id="discord">
+    <a href="https://discord.gg/eldenring" target="_blank">
+        <button>Rejoindre le serveur Discord</button>
+    </a>
+</div>
+
+<style>
+    /* Style du bouton Discord */
+    #discord {
+        position: fixed;
+        top: 600px; /* Ajuste la hauteur pour être sous le chat */
+        right: 20px;
+        width: 300px;
+        text-align: center;
+        background: rgba(0, 0, 0, 0.8);
+        padding: 15px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    }
+
+    #discord button {
+        width: 100%;
+        padding: 10px;
+        background: #7289DA;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        cursor: pointer;
+    }
+
+    #discord button:hover {
+        background: #5b6eae;
+    }
+</style>
+    <script>
+        const messagesDiv = document.getElementById("messages");
+        const input = document.getElementById("messageInput");
+
+        // Connexion WebSocket (serveur public temporaire)
+        const socket = new WebSocket("wss://echo.websocket.org");
+
+        socket.onopen = () => console.log("Connecté au serveur WebSocket");
+        socket.onerror = (error) => console.log("Erreur WebSocket :", error);
+
+        socket.onmessage = (event) => {
+            const div = document.createElement("div");
+            div.textContent = event.data;
+            messagesDiv.appendChild(div);
+            messagesDiv.scrollTop = messagesDiv.scrollHeight;
+        };
+
+        function sendMessage() {
+            const message = input.value.trim();
+            if (message) {
+                socket.send(message);
+                input.value = "";
+            }
+        }
+    </script>
+
+</body>
+</html>

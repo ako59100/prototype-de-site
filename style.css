@@ -1,0 +1,87 @@
+/* Réinitialisation des marges et paddings */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Appliquer l'image de fond sur tout le site */
+body {
+    padding-top: 60px; /* Ajuste selon la hauteur de la barre */
+    background-image: url("senin.jpg"); /* Remplace par ton image */
+    background-size: contain; /* Ajuste l'image pour couvrir toute la page */
+    background-position: center; /* Centre l'image */
+    background-repeat: no-repeat; /* Empêche la répétition de l'image */
+    background-attachment: fixed; /* Fixe l'image pour qu'elle ne bouge pas au scroll */
+    font-family: Arial, sans-serif;
+    color: white; /* Ajuste la couleur du texte pour être lisible sur l'image */
+}
+
+/* Ajoute une légère ombre sur le texte pour plus de lisibilité */
+h1, h2, h3, p {
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+}
+
+/* Style général des sections */
+.container {
+    width: 80%;
+    margin: auto;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.5); /* Ajoute un fond semi-transparent pour améliorer la lisibilité */
+    border-radius: 10px;
+}
+
+/* Ajout de styles pour les boutons */
+button {
+    background-color: #ff6600;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: 0.3s;
+}
+
+button:hover {
+    background-color: #cc5500;
+}
+
+/* Ajout d'un effet responsive */
+@media (max-width: 768px) {
+    .container {
+        width: 95%;
+    }
+}
+/* Barre de navigation */
+.navbar {
+    background-color: rgba(0, 0, 0, 0.8); /* Fond noir semi-transparent */
+    padding: 10px 0;
+    position: fixed; /* Reste en haut même quand on scrolle */
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000; /* Toujours au-dessus des autres éléments */
+}
+
+.navbar ul {
+    list-style: none;
+    text-align: center;
+    padding: 0;
+    margin: 0;
+}
+
+.navbar ul li {
+    display: inline;
+    margin: 0 20px;
+}
+
+.navbar ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.navbar ul li a:hover {
+    color: #ff9900; /* Effet survol couleur orange */
